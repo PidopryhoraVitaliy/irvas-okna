@@ -4,13 +4,15 @@ const modals = () => {
         
         const   triggers = document.querySelectorAll(triggerSelector),
                 modal = document.querySelector(modalSelector),
-                close = document.querySelector(closeSelector);
+                close = document.querySelector(closeSelector),
+                windows = document.querySelectorAll('[data-modal]');
 
         triggers.forEach(element => {
             element.addEventListener('click', (e) => {
                 if (e.target) {
                     e.preventDefault();
                 }
+                //windows.forEach(item => item.style.display = 'none');
                 openModal();
             });
         });
@@ -47,8 +49,9 @@ const modals = () => {
 
     bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
     bindModal('.phone_link', '.popup', '.popup .popup_close');
+    bindModal('.popup_calc_btn', '.popup_calc', '.popup_calc_close');
     
-    showModalByTime('.popup', 120000);
+    showModalByTime('.popup', 300000);
 
 };
 
