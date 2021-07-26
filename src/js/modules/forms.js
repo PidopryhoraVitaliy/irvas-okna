@@ -1,4 +1,6 @@
-const forms = () => {
+import checkNumInputs from "./checkNumInputs";
+
+const forms = (state) => {
 
     const form = document.querySelectorAll('form');
     const inputs = document.querySelectorAll('input');
@@ -8,12 +10,13 @@ const forms = () => {
         failture: 'failture'
     };
 
-    const phoneInputs = document.querySelectorAll('input[name="user_phone"]');
+    /*const phoneInputs = document.querySelectorAll('input[name="user_phone"]');
     phoneInputs.forEach(item => {
         item.addEventListener('input', () => {
             item.value = item.value.replace(/\D/, '');
         });
-    });
+    });*/
+    checkNumInputs('input[name="user_phone"]');
 
     const postData = async (url, data) => {
         document.querySelector('.status').textContent = message.loading;
@@ -34,7 +37,14 @@ const forms = () => {
             const statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
             item.appendChild(statusMessage);
+            
             const formData = new FormData(item);
+            if (item.getAttribute('data-calc') === 'end') {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+            }
+
             postData('assets/server.php', formData)
                 .then(res => {
                     document.querySelector('.status').textContent = message.success;
