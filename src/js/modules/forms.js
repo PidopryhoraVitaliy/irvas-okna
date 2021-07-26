@@ -33,7 +33,9 @@ const forms = (state) => {
 
     form.forEach(item => {
         item.addEventListener('submit', (e) => {
+            
             e.preventDefault();
+            
             const statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
             item.appendChild(statusMessage);
@@ -54,7 +56,8 @@ const forms = (state) => {
                 .finally(() => {
                     clearInputs();
                     setTimeout(() => statusMessage.remove(), 5000);
-                });
+            });
+            
         });
     });
 

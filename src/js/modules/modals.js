@@ -1,4 +1,4 @@
-const modals = () => {
+const modals = (state) => {
 
     function bindModal(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
         
@@ -12,8 +12,18 @@ const modals = () => {
                 if (e.target) {
                     e.preventDefault();
                 }
+
+                // validate
+                if (e.target.classList.contains('popup_calc_button')) {
+                    if (!state.width || state.width.length === 0) {
+                        console.log('state.width: ', 0);
+                        return;
+                    }
+                }
+
                 closeAllModalWindows();
                 openModal();
+
             });
         });
 
