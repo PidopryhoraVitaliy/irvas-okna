@@ -51,11 +51,16 @@ const forms = (state) => {
                 .then(res => {
                     document.querySelector('.status').textContent = message.success;
                     console.log(res);
+                    Object.keys(state).forEach(key => delete state[key]);
                 })
                 .catch(() => document.querySelector('.status').textContent = message.failture)
                 .finally(() => {
                     clearInputs();
-                    setTimeout(() => statusMessage.remove(), 5000);
+                    setTimeout(() => {
+                        statusMessage.remove();
+                        document.querySelectorAll('[data-modal]').forEach(item => item.style.display = 'none');
+                        document.body.style.overflow = '';
+                    }, 3000);
             });
             
         });
